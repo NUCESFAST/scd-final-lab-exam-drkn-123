@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 21i1105-auth
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: 21i1105-auth
+  template:
+    metadata:
+      labels:
+        app: 21i1105-auth
+    spec:
+      containers:
+      - name: 21i1105-auth
+        image: drkn123/auth
+        ports:
+        - containerPort: 3105

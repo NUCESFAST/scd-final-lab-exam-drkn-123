@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: post-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: post
+  template:
+    metadata:
+      labels:
+        component: post
+    spec:
+      containers:
+        - name: post
+          image: <post-image>
+          ports:
+            - containerPort: 27017
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: post-service
+spec:
+  selector:
+    component: post
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 27017

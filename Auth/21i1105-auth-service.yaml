@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: 21i1105-auth
+spec:
+  selector:
+    app: 21i1105-auth
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3105
