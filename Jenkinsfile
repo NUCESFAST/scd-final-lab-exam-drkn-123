@@ -44,5 +44,17 @@ pipeline {
                 }
             }
         }
+        stage('21i1105 Push Docker Images') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    bat 'docker login -u %DOCKER_USER% -p %DOCKER_PASS%'
+                    bat 'docker push drkn123/auth'
+                    bat 'docker push drkn123/classrooms'
+                    bat 'docker push drkn123/client'
+                    bat 'docker push drkn123/event-bus'
+                    bat 'docker push drkn123/post'
+                }
+            }
+        }
     }
 }
