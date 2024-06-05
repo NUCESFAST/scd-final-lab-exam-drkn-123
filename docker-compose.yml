@@ -1,0 +1,50 @@
+version: '3'
+services:
+  auth:
+    build: ./Auth
+    ports:
+      - 3105:3105
+    volumes:
+      - ./Auth:/21i_1105_backend
+    command: npm start
+
+  classrooms:
+    build: ./Classrooms
+    ports:
+      - 4001:4001
+    volumes:
+      - ./Classrooms:/app
+    command: npm start
+
+  event-bus:
+    build: ./event-bus
+    ports:
+      - 4002:4002
+    volumes:
+      - ./event-bus:/app
+    command: npm start
+
+  client:
+    build: ./client
+    ports:
+      - 1105:1105
+    volumes:
+      - ./client:/21i_1105_frontend
+    command: nginx -g "daemon off;"
+
+  post:
+    build: ./Post
+    ports:
+      - 27017:27017
+    volumes:
+      - ./Post:/data/db
+
+  mongodb:
+    image: mongo:latest
+    volumes:
+      - mongodb_data:/data/db
+    ports:
+      - 27017:27017
+
+volumes:
+  mongodb_data:
